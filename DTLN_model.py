@@ -82,7 +82,10 @@ class audio_generator():
         for file in self.file_names:
             # read the audio files
             noisy, fs_1 = sf.read(os.path.join(self.path_to_input, file))
-            speech, fs_2 = sf.read(os.path.join(self.path_to_s1, file))
+            name_list = file.split('_')
+            fileid_name = name_list[-2] + '_' + name_list[-1]
+            clean_file = 'clean_' + fileid_name
+            speech, fs_2 = sf.read(os.path.join(self.path_to_s1, clean_file))
             # check if the sampling rates are matching the specifications
             if fs_1 != self.fs or fs_2 != self.fs:
                 raise ValueError('Sampling rates do not match.')
